@@ -12,12 +12,10 @@ const config = require("./server/config/keys");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-app.use('/api/dialogflow', require('./server/routes/dialogflow'));
+app.use("/api/dialogflow", require("./server/routes/dialogflow"));
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === "production") {
-
   // Set static folder
   app.use(express.static("client/build"));
 
@@ -30,5 +28,5 @@ if (process.env.NODE_ENV === "production") {
 const port = process.env.PORT || 5000;
 
 app.listen(port, () => {
-  console.log(`Server Running at ${port}`)
+  console.log(`Server Running at ${port}`);
 });
