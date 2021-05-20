@@ -16,12 +16,13 @@
   "author": "Jaewon Ahn",
   "license": "ISC",
   "dependencies": {
-    "actions-on-google": "^2.6.0",
+    "@google-cloud/dialogflow": "3.5.0",
+    "actions-on-google": "2.14.0",
     "body-parser": "^1.18.3",
-    "dialogflow": "^0.8.2",
+    "dialogflow": "0.8.2",
     "dialogflow-fulfillment": "^0.6.1",
     "express": "^4.16.4",
-    "mongoose": "^5.4.20"
+    "mongoose": "5.12.9"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",

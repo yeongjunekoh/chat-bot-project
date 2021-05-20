@@ -22,6 +22,7 @@ router.post("/textQuery", async (req, res) => {
   //We need to send some information that comes from client to the Dialogflow API
   //How to send information?
 
+  console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
   // The text query request.
   const request = {
     session: sessionPath,
