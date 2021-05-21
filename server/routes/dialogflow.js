@@ -50,4 +50,34 @@ router.post("/textQuery", async (req, res) => {
 
 //Event Query routes
 
+router.post("/eventQuery", async (req, res) => {
+  //We need to send some information that comes from client to the Dialogflow API
+  //How to send information?
+
+  console.log(process.env.GOOGLE_APPLICATION_CREDENTIALS);
+  // The text query request.
+  const request = {
+    session: sessionPath,
+    queryInput: {
+      event: {
+        // The query to send to the dialogflow agent
+        name: req.body.event,
+        //This Text not a hard coding but dynamic coding
+        // The language used by the client (en-US)
+        languageCode: languageCode,
+      },
+    },
+  };
+
+  // Send request and log result
+  const responses = await sessionClient.detectIntent(request);
+  console.log("Detected intent");
+  const result = responses[0].queryResult;
+  console.log(`  Query: ${result.queryText}`);
+  console.log(`  Response: ${result.fulfillmentText}`);
+
+  //send back responses to front
+  res.send(result);
+});
+
 module.exports = router;
