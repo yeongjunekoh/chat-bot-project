@@ -1,9 +1,12 @@
-import React from "react";
-import { text } from "body-parser";
+import React, { useEffect } from "react";
 import Axios from "axios";
 
 function Chatbot() {
-  const textQuery = async () => {
+  useEffect(() => {
+    eventQuery("WelcometoMyWebsite");
+  }, []);
+
+  const textQuery = async (text) => {
     //first need to take care of message I sent
     let conversation = {
       who: "user",
@@ -32,6 +35,36 @@ function Chatbot() {
       console.log(conversation);
     } catch (error) {
       conversation = {
+        who: "bot",
+        content: {
+          text: {
+            text: "Error just ocurred, please check the problem",
+          },
+        },
+      };
+      console.log(conversation);
+    }
+  };
+
+  const eventQuery = async (event) => {
+    const eventQueryVariables = { event };
+
+    //we need to take care of the message the chatbot sent
+    try {
+      //I will send request to the textQuery Route
+      const response = await Axios.post(
+        "/api/dialogflow/eventQuery",
+        eventQueryVariables
+      );
+      const content = response.data.fulfillmentMessages[0];
+
+      let conversation = {
+        who: "bot",
+        content: content,
+      };
+      console.log(conversation);
+    } catch (error) {
+      let conversation = {
         who: "bot",
         content: {
           text: {
